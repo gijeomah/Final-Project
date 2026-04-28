@@ -35,7 +35,7 @@
     ~create a function get_loaction(input.value){loops through the keys in the dictionary e.g for (let key in data){if (loacate == data[key]){console.log(key,data[key]) & location = data[key] *userobj somehow* }} }
     ~figure out how to loop through currents objs too 
 
-    ~have a class that stores the location time, the current temp and condtion text and icon as properties??? and append them to the web browser?? 
+    ~have a main class that stores all the properties I need, the current temp and condtion text and icon as properties. Then I will create a locationModule that extends the main class that has two functions current and forecast. Within thoes functions I will gain a certain properties of thoes specfic modules and and loop though daily to get cerain information of each day if needed. The last module will extend the module run the functions defined in the second class a properties and amppends this information to the DOM. 
 # Requirments
 A class, function, loop/if statment, Dom creation, Event listners
 
