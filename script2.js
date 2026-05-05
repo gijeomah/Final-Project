@@ -1,13 +1,16 @@
 //Getting the location
 //const inpt = localStorage.getItem('user_inpt');
 //code for the api
-// const inpt = document.getElementById('locate');
-// const btn = document.getElementById('btn');
-// btn.addEventListener('click', function(){
-//     inpt = inpt.value;
-// });
+const inpt = document.getElementById('locate');
+const btn = document.getElementById('btn');
+let inpt_val;
+let Api_url;
+btn.addEventListener('click', function(){
+    inpt_val = inpt.value;
+    Api_url=`http://api.weatherapi.com/v1/forecast.json?key=${encodeURIComponent(Api_key)}&q=${inpt_val}&days=3`;
+    loadDashboard();
+});
 const Api_key = "d73b4b5315cc473e8e3215605262704";
-let Api_url= `http://api.weatherapi.com/v1/forecast.json?key=${encodeURIComponent(Api_key)}&q=Paris`;
 // const Api_url= `http://api.weatherapi.com/v1`;
 console.log(Api_url);
 const div = document.getElementById('div');
@@ -29,7 +32,7 @@ async function getData(){
  };
 
 
-(async () => {
+async function loadDashboard() {
 
 
 
@@ -77,9 +80,13 @@ class dashboard{
     //lst = [];
     calculate_forcast(){
         //let count=0; 
-        for(let count=0; count<=data['forecast']['forecastday'].length; count++){
-            console.log(data);
-            //console.log((data['forecast']['forecastday'][count].day))
+        for(let count=0; count < data['forecast']['forecastday'].length; count++){
+            //console.log(data);
+            console.log((data['forecast']['forecastday'][count]))
+            div.innerHTML+="<p> Date:" + data['forecast']['forecastday'][count]['date']+"</p>"
+            div.innerHTML+="<p> Max Temp:" + data['forecast']['forecastday'][count]['day']['maxtemp_f'] + "</p>"+"<p> Min Temp:"+ data['forecast']['forecastday'][count]['day']['mintemp_f']
+            //div.innerHTML+=
+            //hr Makes the line width; 
         }
         //code
         //Api_url= `http://api.weatherapi.com/v1/forecast.json?key=${encodeURIComponent(Api_key)}&q=Paris`;
@@ -135,4 +142,4 @@ let data_pnt=new display(data);
 //data_pnt.calculate_forcast();
 
 
-})();
+};
