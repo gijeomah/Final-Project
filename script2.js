@@ -1,8 +1,13 @@
 //Getting the location
 //const inpt = localStorage.getItem('user_inpt');
 //code for the api
+// const inpt = document.getElementById('locate');
+// const btn = document.getElementById('btn');
+// btn.addEventListener('click', function(){
+//     inpt = inpt.value;
+// });
 const Api_key = "d73b4b5315cc473e8e3215605262704";
-const Api_url= `http://api.weatherapi.com/v1/current.json?key=${encodeURIComponent(Api_key)}&q=Paris`;
+let Api_url= `http://api.weatherapi.com/v1/forecast.json?key=${encodeURIComponent(Api_key)}&q=Paris`;
 // const Api_url= `http://api.weatherapi.com/v1`;
 console.log(Api_url);
 const div = document.getElementById('div');
@@ -69,11 +74,30 @@ class dashboard{
         div.appendChild(p_text);
         p_text.innerHTML = this.text;
     }
+    //lst = [];
     calculate_forcast(){
-        //code
-        for (const[key,value] of object.entries(data['forecast']['forecastday'])){
-            
+        //let count=0; 
+        for(let count=0; count<=data['forecast']['forecastday'].length; count++){
+            console.log(data);
+            //console.log((data['forecast']['forecastday'][count].day))
         }
+        //code
+        //Api_url= `http://api.weatherapi.com/v1/forecast.json?key=${encodeURIComponent(Api_key)}&q=Paris`;
+        //console.log(data['forecast']['forecastday'][0].day)
+        //for (let i=0; i< )
+        // while (counter<=3){
+
+
+        // }
+        // for ()
+        //  for (count of data['forecast']['forecastday'][counter++].day ){
+        //     console.log(i);
+        // }
+        // for (const[key,value] of Object.entries(data['forecast']['forecastday'])){
+        //     console.log(key,value);
+        //     //let max_temp = 
+            
+        // }
 
 
     }
@@ -85,6 +109,7 @@ class display extends  dashboard{
     constructor(){
         super(data);
         super.display_dasboard();
+        super.calculate_forcast();
     }
 }
 
@@ -107,7 +132,7 @@ class display extends  dashboard{
 // let data_pnt=new abstract(data);
 // data_pnt.display_dasboard();
 let data_pnt=new display(data);
-
+//data_pnt.calculate_forcast();
 
 
 })();
