@@ -7,7 +7,7 @@ let inpt_val;
 let Api_url;
 btn.addEventListener('click', function(){
     inpt_val = inpt.value;
-    Api_url=`http://api.weatherapi.com/v1/forecast.json?key=${encodeURIComponent(Api_key)}&q=${inpt_val}&days=3`;
+    Api_url=`http://api.weatherapi.com/v1/forecast.json?key=${encodeURIComponent(Api_key)}&q=${inpt_val}&days=3&hour=19`;
     loadDashboard();
 });
 const Api_key = "d73b4b5315cc473e8e3215605262704";
@@ -69,10 +69,10 @@ class dashboard{
         img.src=this.image;
         let p_temp = document.createElement('p');
         div.appendChild(p_temp);
-        p_temp.innerHTML = this.curr_temp;
+        p_temp.innerHTML = "current tempreature: "+this.curr_temp;
         let p_feels = document.createElement('p');
         div.appendChild(p_feels);
-        p_feels.innerHTML = this.feel_like;
+        p_feels.innerHTML = "feels like:" + this.feel_like;
         let p_text = document.createElement('p');
         div.appendChild(p_text);
         p_text.innerHTML = this.text;
@@ -85,30 +85,32 @@ class dashboard{
             console.log((data['forecast']['forecastday'][count]))
             div.innerHTML+="<p> Date:" + data['forecast']['forecastday'][count]['date']+"</p>"
             div.innerHTML+="<p> Max Temp:" + data['forecast']['forecastday'][count]['day']['maxtemp_f'] + "</p>"+"<p> Min Temp:"+ data['forecast']['forecastday'][count]['day']['mintemp_f']
-            //div.innerHTML+=
+            div.innerHTML+="<p> Condition:" + data['forecast']['forecastday'][count]['day']['condition']['text'] + "</p>" + "<img src=" + data['forecast']['forecastday'][count]['day']['condition']['icon'] + ">"
+            div.innerHTML+="<p> Chance of Rain:" + data['forecast']['forecastday'][count]['day']['daily_chance_of_rain'] + "%</p>"
+            div.innerHTML+="<hr>";
             //hr Makes the line width; 
-        }
-        //code
-        //Api_url= `http://api.weatherapi.com/v1/forecast.json?key=${encodeURIComponent(Api_key)}&q=Paris`;
-        //console.log(data['forecast']['forecastday'][0].day)
-        //for (let i=0; i< )
-        // while (counter<=3){
+        };
 
+    };
+    calculate_daily(){
 
-        // }
-        // for ()
-        //  for (count of data['forecast']['forecastday'][counter++].day ){
-        //     console.log(i);
-        // }
-        // for (const[key,value] of Object.entries(data['forecast']['forecastday'])){
-        //     console.log(key,value);
-        //     //let max_temp = 
-            
-        // }
+        let curr_time = data['location']['localtime'];
 
+        const hour = Number(curr_time.split(" ")[1].split(":")[0]);
+        //str.curr_time.split(" ");
+        console.log(hour);
+    
+        // console.log(curr_time);
+        // //for (let count=0; curr_time< )
+        // for (let count=0; count < data['forecast']['forecastday'].length; count++){
+        //     //console.log(data['forecast']['forecastday'][count]['hour']['time']);
+        //     div.innerHTML+="<p> Daily Date:" + data['forecast']['forecastday'][count]['hour'][count]['time'] +"</p>"
+        //     //div. 
 
+        // };
     }
 }
+   
 
 
    
@@ -117,6 +119,7 @@ class display extends  dashboard{
         super(data);
         super.display_dasboard();
         super.calculate_forcast();
+        super.calculate_daily();
     }
 }
 
