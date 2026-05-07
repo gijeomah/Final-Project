@@ -7,7 +7,7 @@ let inpt_val;
 let Api_url;
 btn.addEventListener('click', function(){
     inpt_val = inpt.value;
-    Api_url=`http://api.weatherapi.com/v1/forecast.json?key=${encodeURIComponent(Api_key)}&q=${inpt_val}&days=3&hour=19`;
+    Api_url=`http://api.weatherapi.com/v1/forecast.json?key=${encodeURIComponent(Api_key)}&q=${inpt_val}&days=3`;
     loadDashboard();
 });
 const Api_key = "d73b4b5315cc473e8e3215605262704";
@@ -96,10 +96,48 @@ class dashboard{
 
         let curr_time = data['location']['localtime'];
 
-        const hour = Number(curr_time.split(" ")[1].split(":")[0]);
+        let hr = Number(curr_time.split(" ")[1].split(":")[0]);
         //str.curr_time.split(" ");
-        console.log(hour);
+        console.log(hr,data['forecast']['forecastday'][0]['hour'].length);
+
+        let hoursArray = data['forecast']['forecastday'][0]['hour']
+        hoursArray.push(...data['forecast']['forecastday'][1]['hour'])
+       //[1,2,3].extend([4,5,6]) == [1,2,3,4,5,6]
+
+        for (let numHours = 0; numHours < 5; numHours++){
+            // console.log("smthg")
+            div.innerHTML+="<p> Daily Date:" + hoursArray[hr]['time'] + "</p>";
+            div.innerHTML+="<p> Daily Temp:" + hoursArray[hr]['temp_f'] + "</p>";
+            div.innerHTML+="<p> Condtion:" +  hoursArray[hr]['condition']["text"] + "</p>";
+            console.log(hoursArray[hr]['condition']['icon']);
+
+            //let images=hoursArray[hr]['condition']['icon'];
+            //console(images);
+            //div.innerHTML+="<p> Img:" + hoursArray[hr]['icon'] + "</p>";
+            let img2 = document.createElement('img');
+            div.appendChild(img2);
+            img2.src=hoursArray[hr]['condition']['icon'];
+            div.innerHTML+="<hr>";
+            //img2.src=[hoursArray][hr]['condition']['icon'];
+            // //[0]['hour'][hr]['icon'];
+
+
+
+            hr += 3;
+        };
     
+
+        
+        // for (let i=0; i< data['forecast']['forecastday'].length; i++){
+        //     for (hr; hr<data['forecast'][forecast])
+        // }
+       
+        // for (hr; hr < data['forecast']['forecastday'].length; hour+=3 ){
+        //     div.innerHTML+="<p> Daily Date:" + data['forecast']['forecastday'][hr]['hour'][hr]['time'];
+        //     };
+    
+    
+        
         // console.log(curr_time);
         // //for (let count=0; curr_time< )
         // for (let count=0; count < data['forecast']['forecastday'].length; count++){
