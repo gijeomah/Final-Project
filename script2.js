@@ -77,7 +77,6 @@ class dashboard{
         div.appendChild(p_text);
         p_text.innerHTML = this.text;
     }
-    //lst = [];
     calculate_forcast(){
         //let count=0; 
         for(let count=0; count < data['forecast']['forecastday'].length; count++){
@@ -149,7 +148,7 @@ class dashboard{
     }
 }
    
-
+//cudfufhgikhdfxbgv
 
    
 class display extends  dashboard{
